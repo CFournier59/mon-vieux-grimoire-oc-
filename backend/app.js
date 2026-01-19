@@ -19,10 +19,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-    console.log('Requête reçue !');
-    res.status(200).json({ message: 'Tout fonctionne parfaitement !' });
-
+app.get('/api/books', (req, res, next) => {
+  Book.find()
+    .then(books => res.status(200).json(books))
+    .catch(error => res.status(400).json({ error }));
 });
 
 module.exports = app;
