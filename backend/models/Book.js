@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const auth = require('../middleware/auth');
 
 const ratingSchema = mongoose.Schema({
     userId: { type: String, required: true },
