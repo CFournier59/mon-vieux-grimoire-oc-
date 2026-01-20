@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Book = require('./models/Book');
+const bookRoutes = require('./routes/book');
 
 const app = express();
 
@@ -19,10 +19,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/api/books', (req, res, next) => {
-  Book.find()
-    .then(books => res.status(200).json(books))
-    .catch(error => res.status(400).json({ error }));
-});
+app.use('/api/books', bookRoutes);
 
 module.exports = app;
