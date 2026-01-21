@@ -2,14 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bookRoutes = require('./routes/book');
 const userRoutes = require('./routes/user');
+const dotenv = require('dotenv').config();
 
 const app = express();
 
-const credentials = require('./credentials');
-const clusterUserName = credentials.clusterUserName
-const clusterPassWord = credentials.clusterPassWord
-
-mongoose.connect(`mongodb+srv://${clusterUserName}:${clusterPassWord}@cluster0.okbdkgb.mongodb.net/?appName=cluster0`)
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_DB}.okbdkgb.mongodb.net/?appName=cluster0`)
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
