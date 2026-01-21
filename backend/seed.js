@@ -7,7 +7,7 @@ const data = require('../frontend/public/data/data.json');
 const User = require('./models/User');
 const dotenv = require('dotenv').config();
 
-mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_DB}.okbdkgb.mongodb.net/?appName=cluster0`)
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_DB}.okbdkgb.mongodb.net/vieux-grimoire?retryWrites=true&w=majority`)
   .then(async () => {
     console.log('Connecté à MongoDB');
     await Book.deleteMany(); // vide la collection
