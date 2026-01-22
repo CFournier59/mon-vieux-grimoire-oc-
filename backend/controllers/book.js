@@ -18,6 +18,25 @@ exports.getThisBook = (req, res, next) => {
     .catch(error => res.status(404).json({ error }));
 }
 
+exports.rateBook =  (req, res, next) => {
+    const userId = req.auth.userId;
+    const rating = req.body.rating;
+    Book.findOne({ _id: req.params.id })
+    .then(book => {
+        const existingRating = book.ratings.find(r => r.userId === userId);
+        if (existingRating) {
+            return res.status(400).json({ message: 'Vous avez déjà noté ce livre.' });
+        }
+        book.ratings.push({ userId : userId, grade: rating });
+        const totalRating = book.ratings.reduce((sum, r) => sum + r.grade, 0);
+        book.averageRating = (totalRating / book.ratings.length).toFixed(1);
+        book.save()
+        .then(() =>  res.status(200).json( book ))
+        .catch(error => res.status(400).json({ error }));
+    })
+    .catch(error => res.status(404).json({ error }));
+}
+
 exports.createBook = (req, res, next) => {
     const bookObject = JSON.parse(req.body.book);
     delete bookObject._userId;
