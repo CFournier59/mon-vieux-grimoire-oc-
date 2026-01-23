@@ -80,12 +80,16 @@ exports.modifyBook = (req, res, next) => {
     Book.findOne({_id: req.params.id})
     .then((book) => {
         if (book.userId != req.auth.userId) {
-            res.status(403).json({message: 'Non-autorisé'});
-        } else {
-            Book.updateOne({ _id: req.params.id}, { ...bookObject, _id: req.params.id})
-            .then(() => res.status(200).json({message: 'Livre modifié !'}))
-            .catch(error => res.status(401).json({ error }));
-        }
+            return res.status(403).json({message: 'Non-autorisé'});
+        } 
+        if(req.file){
+            const filename = book.imageUrl.split('/images/')[1];
+            fs.unlink(`images/${filename}`, (err) => {
+                if (err) console.log(err)
+            })}
+        Book.updateOne({ _id: req.params.id}, { ...bookObject, _id: req.params.id})
+        .then(() => res.status(200).json({message: 'Livre modifié !'}))
+        .catch(error => res.status(401).json({ error }));   
     })
     .catch( error => {
         res.status(500).json({ error });
