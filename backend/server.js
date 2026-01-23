@@ -12,6 +12,8 @@ const normalizePort = val => {
   }
   return false;
 };
+
+// définition du port d'écoute
 const port = normalizePort(process.env.PORT ||'4000');
 app.set('port', port);
 
@@ -35,6 +37,7 @@ const errorHandler = error => {
   }
 };
 
+// création du serveur HTTP
 const server = http.createServer(app);
 
 server.on('error', errorHandler);

@@ -1,5 +1,5 @@
 // script d'initialisation/réinitialisation des données dans la base MongoDB, 
-// à lancer avec la commande : node backend/seed.js
+// à lancer, si necessaire, avec la commande : node backend/seed.js
 
 const mongoose = require('mongoose');
 const Book = require('./models/Book');

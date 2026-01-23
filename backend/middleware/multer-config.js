@@ -1,3 +1,5 @@
+// middleware de configuration de multer pour la gestion des fichiers
+
 const multer = require('multer');
 
 const MIME_TYPES = {

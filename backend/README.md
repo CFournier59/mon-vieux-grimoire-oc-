@@ -22,3 +22,8 @@ Dans le dossier backend, créez un fichier et nommez-le `.env`, puis collez-y le
 Lancez la commande : `node server`
 le serveur backend est configuré à: http://localhost:4000
 
+### (Optionnel) nettoyage de la base de données
+
+Pour réinitialiser la base de données, lancez depuis le dossier backend la commande: 
+`node seed.js`
+
